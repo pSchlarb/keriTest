@@ -1,0 +1,11 @@
+{
+    "editor.defaultFoldingRangeProvider": "zokugun.explicit-folding",
+    "editor.foldingStrategy": "auto",
+    "explicitFolding.rules": {
+        "*": {
+            "begin": "#region",
+            "end": "#endregion"
+        }
+    },
+    "http.client": {}
+}

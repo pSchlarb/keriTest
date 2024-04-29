@@ -1,0 +1,6 @@
+{
+    "destination": "requestee",
+    "treasureSplit": "50/50",
+    "partyThreshold": 2,
+    "journeyEndorser": "charlie"
+  }
