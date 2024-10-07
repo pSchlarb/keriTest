@@ -14,25 +14,27 @@ For testing purposes the facility and identity ACDC's are copies of the Treasure
 
 
 ```mermaid
-flowchart
-A[Alice]== 1. Requests ==> B["Bob"]
-B == 2. Challenge ==> A
+flowchart 
+A[Alice]== 1 . Requests ==> B["Bob"]
+B == 2 . Challenge ==> A
+
+
 subgraph Alice#s Realm
 
-A == "3. Challenge Response" ==> PA{Prelimenary Attestation}
+A == "3 . Challenge Response" ==> PA{Prelimenary Attestation}
 Identity{Identity ACDC}-.- Chained -.-> PA
-
 end
+
 subgraph Bobs Realm
 
-PA ==4. Presents ACDC ==> B
-B == 5. Checks Challenge and issues ==> AACDC{Attestation ACDC}
+PA == 4 . Presents ACDC ==> B
+B == "5 . Checks Challenge and issues " ==> AACDC{Attestation ACDC}
 FA{Facillity ACDC} -.- chained-.-> AACDC
 PA -.- chained -.-> AACDC
 end
 
 subgraph Charlies Realm
-AACDC == 4. Facillity issue Attestation ACDC ==> C[Charlie]
+AACDC == 4 . Facillity issues / presents Attestation ACDC ==> C[Charlie]
 end
 ```
 
