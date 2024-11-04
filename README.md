@@ -27,7 +27,7 @@ end
 
 subgraph Bobs Realm
 
-PA == 4 . Presents ACDC ==> B
+PA == 4 . Presents PACDC ==> B
 B == "5 . Checks Challenge and issues " ==> AACDC{Attestation ACDC}
 FA{Facillity ACDC} -.- chained-.-> AACDC
 PA -.- chained -.-> AACDC

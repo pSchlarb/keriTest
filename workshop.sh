@@ -324,7 +324,23 @@ kli saidify --file credential_data/attestation_edges.json
 cat credential_data/attestation_edges.json
 echo ""
 
-witnessLog "region PACDC start" 
+witnessLog "region A ACDC start" 
 echo "Creating attestation Credential"
-#attestationAID=$(kli vc create --name bc --alias bob --registry-name bcR --schema ECzdPrLuGn6vnZCPJUcYwWfRbNbAGQBkrX2aBmEH5u4V --recipient ccAlias --data @credential_data/attestation.json --edge @credential_data/attestation_edges.json --rules @credential_data/rulesAttestation.json)
-kli vc create --name bc --alias bob --registry-name bcR --schema ECzdPrLuGn6vnZCPJUcYwWfRbNbAGQBkrX2aBmEH5u4V --recipient ccAlias --data @credential_data/attestation.json --edge @credential_data/attestation_edges.json --rules @credential_data/rulesAttestation.json
+#attestationAID=$(kli vc create --name bc --alias bob --registry-name bcR --schema ENpwyXio-RdNBazqrHSP1Ctl41qf_NPVnmj8eYP7IwTK --recipient ccAlias --data @credential_data/attestation.json --edge @credential_data/attestation_edges.json --rules @credential_data/rulesAttestation.json)
+AAID=$(kli vc create --name bc --alias bob --registry-name bcR --schema ENpwyXio-RdNBazqrHSP1Ctl41qf_NPVnmj8eYP7IwTK --recipient ccAlias --data @credential_data/attestation.json --edge @credential_data/attestation_edges.json --rules @credential_data/rulesAttestation.json)
+echo $AAID
+AAID=$(echo "$AAID" | grep has | awk '{print $1}')
+logEnv AAID $AAID
+echo "Attestation Credential AID: $AAID created and issued"
+
+
+kli ipex grant --name bc --alias bob --said ${AAID} --recipient cc
+GRANT=$(kli ipex list --name cc --alias charlie --poll --said| tail -n1)
+kli ipex list --name cc -V
+
+
+echo "###Outside Challenge validation happening here###"
+
+kli ipex admit --name cc --alias charlie --said "${GRANT}"
+witnessLog "#endregion A ACDC"
+#endregion 
